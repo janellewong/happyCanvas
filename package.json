@@ -1,0 +1,16 @@
+{
+  "name": "happycanvas",
+  "version": "1.0.0",
+  "description": "Fires confetti in the browser on Canvas submission pages",
+  "main": "./node_modules/canvas-confetti/src/confetti.js",
+  "dependencies": {
+    "browserify": "^17.0.0",
+    "canvas-confetti": "^1.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ryan Laufsen",
+  "license": "GPL-3.0-or-later"
+}

@@ -1,0 +1,47 @@
+{
+    "name": "Happy Canvas",
+    "description": "Fires confetti when you click Submit",
+    "version": "0.0.0.1",
+    "manifest_version": 2,
+    "background": {
+      "scripts": ["background.js"]
+    },
+    "permissions": [
+      "activeTab",
+      "declarativeContent",
+      "storage"
+    ],
+    "browser_action": {
+      "default_icon": {                
+        "16": "images/happyCanvas16.png",     
+        "24": "images/happyCanvas24.png",     
+        "32": "images/happyCanvas32.png",
+        "48": "images/happyCanvas48.png",
+        "64": "images/happyCanvas64.png",
+        "128": "images/happyCanvas128.png",
+        "256": "images/happyCanvas256.png",
+        "512": "images/happyCanvas512.png"
+      },
+      "default_title": "Happy Canvas",
+      "default_popup": "popup.html"    
+    },
+    "icons": {                
+      "16": "images/happyCanvas16.png",     
+      "24": "images/happyCanvas24.png",     
+      "32": "images/happyCanvas32.png",
+      "48": "images/happyCanvas48.png",
+      "64": "images/happyCanvas64.png",
+      "128": "images/happyCanvas128.png",
+      "256": "images/happyCanvas256.png",
+      "512": "images/happyCanvas512.png"
+    },
+    "web_accessible_resources": [
+      "audio/confetti_pop.mp3"
+    ],
+    "content_scripts": [
+      {
+          "matches": ["<all_urls>"],
+          "js": ["bundle.js"]
+      }
+    ]
+  }
