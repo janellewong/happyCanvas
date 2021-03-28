@@ -104,9 +104,15 @@ window.onload=function(){
     //   }
     // }
 
-    if (url.indexOf("canvas.") != -1 && url.indexOf(".ca") != -1) {
-      submitConfetti();
-    }
+    // if (url.indexOf("canvas.") != -1 && url.indexOf(".ca") != -1) {
+    //   submitConfetti();
+    // }
+  var instructureElement =  document.getElementById('instructure_ajax_error_box');
+  if (typeof(instructureElement) != 'undefined' && instructureElement != null)
+  {
+    // Exists.
+    submitConfetti();
+  }
 };
 },{"canvas-confetti":2}],2:[function(require,module,exports){
 (function main(global, module, isWorker, workerSize) {
