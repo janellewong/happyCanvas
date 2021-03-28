@@ -3,19 +3,16 @@ var url = window.location.href;
 // var schoolName = /\.(.*)\./g.exec(url)[1].toUpperCase(); // extracts and capitalizes school acronym from URL
 
 function submitConfetti() {
-    // document.getElementById("submit_quiz_button").addEventListener("click", function() {
-    //     alert("Submit button was clicked!");
-    // });
-
+    
     const confetti = require("canvas-confetti");
     var pop = new Audio(chrome.runtime.getURL("audio/confetti_pop.mp3"));
     pop.load();
 
+    // alert("break"); // for testing toggle button
+
     var end = Date.now() + 600;
 
-    if (document.getElementById("flash_message_holder").innerText == "Assignment successfully submitted.") {
-      // console.log("pew pew");
-      
+    function playSequence() {
       pop.play();
       var colors = ['#9B5DE5', '#F15BB5', '#FEE440', '#00BBF9', '#00F5D4'];
 
@@ -41,17 +38,75 @@ function submitConfetti() {
       }());
     }
 
+    // when submitting assignment
+    if (document.getElementById("flash_message_holder").innerText == "Assignment successfully submitted.") {
+      playSequence();
+    }
+
+    // when submitting quiz
+    var submitDateMessage = document.getElementsByClassName("quiz-submission")[0].getElementsByTagName("DIV")[1].innerText;
+    console.log(submitDateMessage);
+    var submitTime = submitDateMessage.split(" ");
+    var submitMonth = submitTime[1]; // String: ex. Mar
+    var submitDay = Number(submitTime[2]); // 27 
+    // var submitHour = submitTime[4][0]; // not 24 hr clock
+    submitHourMinute = submitTime[4] 
+    var submitHour = Number(submitHourMinute.match(/\d*/g)[0]);
+    var submitMinute = Number(submitHourMinute.match(/\d*/g)[2]); 
+    var submitAmPm = submitTime[4].substr(-2,2);
+
+      var months = {
+        'Jan' : 1,
+        'Feb' : 2,
+        'Mar' : 3,
+        'Apr' : 4,
+        'May' : 5,
+        'Jun' : 6,
+        'Jul' : 7,
+        'Aug' : 8,
+        'Sep' : 9,
+        'Oct' : 10,
+        'Nov' : 11,
+        'Dec' : 12
+      } 
+
+    var date = new Date();
+    currentMonth = date.getMonth() + 1; // march: 3 
+    currentDay = date.getDate(); // 27
+    currentHour = date.getHours(); // changed to non-24 hr clock
+    currentMinute = date.getMinutes(); 
+
+    function timeMatch() {
+
+      if (submitAmPm == "pm") {
+        submitHour = submitHour + 12;
+      }
+
+      return currentMonth == months[submitMonth] && currentDay == submitDay && currentHour == submitHour && (currentMinute == submitMinute || submitMinute+1);
+    }
+
+    if(timeMatch() == true) {
+      playSequence();
+    }
+
 }
 
 window.onload=function(){
-    
-    // todo: add toggle on and off
 
-    // checks to see if active site URL has Canvas subdomain and ending with .ca
+  // todo: toggle feature
+  var toggleButton = document.getElementsByTagName("INPUT")[0];
+    
+    // if (toggleButton.checked == true) {
+    //   // checks to see if active site URL has Canvas subdomain and ending with .ca
+    //   if (url.indexOf("canvas.") != -1 && url.indexOf(".ca") != -1) {
+    //   submitConfetti();
+    //   // alert("We are on " + schoolName + " Canvas!");
+    //   }
+    // }
+
     if (url.indexOf("canvas.") != -1 && url.indexOf(".ca") != -1) {
-        submitConfetti();
-        // alert("We are on " + schoolName + " Canvas!");
-      }
+      submitConfetti();
+    }
 };
 },{"canvas-confetti":2}],2:[function(require,module,exports){
 (function main(global, module, isWorker, workerSize) {
